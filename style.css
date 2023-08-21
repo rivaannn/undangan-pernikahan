@@ -160,7 +160,9 @@ body {
 
 .info h2,
 .story h2,
-.gallery h2 {
+.gallery h2,
+.rsvp h2,
+.gifts h2 {
   color: var(--pink);
   font-family: "Sacramento", cursive;
   font-size: 5rem;
@@ -200,13 +202,16 @@ body {
 
 /* Story */
 .story,
-.gallery {
+.gallery,
+.rsvp,
+.gifts {
   padding-top: 10rem;
   padding-bottom: 8rem;
 }
 
 .story span,
-.gallery span {
+.gallery span,
+.gifts span {
   text-transform: uppercase;
   color: #666;
   font-size: 0.9rem;
@@ -216,7 +221,9 @@ body {
 }
 
 .story p,
-.gallery p {
+.gallery p,
+.rsvp p,
+.gifts p {
   font-size: 1rem;
   font-weight: 300;
 }
@@ -320,6 +327,62 @@ body {
 /* Gallery */
 .gallery {
   background-color: #f5f5f5;
+}
+
+/* RSVP */
+.rsvp {
+  background-color: var(--bg);
+  color: white;
+}
+
+.rvsp h2 {
+  font-size: 4.5rem;
+}
+
+.rvsp p {
+  color: white;
+}
+
+.rsvp button {
+  background-color: var(--pink);
+  color: white;
+  border: 1px solid var(--pink);
+}
+
+.rsvp button:hover {
+  background-color: white;
+  color: var(--pink);
+  border: 1px solid white;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--bg);
+  color: white;
+  padding: 2rem 0;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--pink);
+}
+
+.footer h2 {
+  color: var(--pink);
+  font-family: "Sacramento", cursive;
+  font-weight: bold;
+  font-size: 4rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
 }
 
 /* Media Query */
