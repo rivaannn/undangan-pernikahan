@@ -33,7 +33,7 @@
     <section id="hero"
         class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white">
         <main>
-            <h4>To Mr/Mrs/Brother/Sisters,</h4>
+            <h4>To <span>Mr/Mrs/Brother/Sisters, </span></h4>
             <h1>Someone & Someone</h1>
             <p>Will hold a wedding reception in :</p>
             <div class="simply-countdown"></div>
@@ -127,6 +127,12 @@
                     <h2>Event Information</h2>
                     <p class="alamat">Address :Bandung Convention Center Building, <br> Jl. Soekarno Hatta No.354, Kb.
                         Lega, Kec. Bojongloa Kidul, Kota Bandung</p>
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15842.045467886817!2d107.598862!3d-6.9488447!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e89569ffdb69%3A0x6c9a53530e0d0d8e!2sBandung%20Convention%20Centre!5e0!3m2!1sid!2sid!4v1693664315803!5m2!1sid!2sid"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                     <a href="https://goo.gl/maps/a4T9TpVddx61jxWr8" target="_blank"
                         class="btn btn-light btn-sm my-3">Click To open the map</a>
                     <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo exercitationem
@@ -347,6 +353,31 @@
                 </div>
         </div>
         </form>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://my-wedding-4.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                        powered by
+                        Disqus.</a></noscript>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -416,6 +447,18 @@
             </div>
     </footer>
 
+    <!-- Audio Section -->
+    <div id="audio-container">
+        <audio id="song" autoplay loop>
+            <source src="audio/adieu-ao.mp3" type="audio/mp3">
+        </audio>
+
+        <div class="audio-icon-wrapper" style="display: none;">
+            <i class="bi bi-disc"></i>
+            <!-- <i class="bi bi-pause-circle"></i> -->
+        </div>
+    </div>
+
 
 
 
@@ -427,8 +470,8 @@
 
     <script>
         simplyCountdown('.simply-countdown', {
-            year: 2023, // required
-            month: 12, // required
+            year: 2024, // required
+            month: 1, // required
             day: 24, // required
             hours: 8, // Default is 0 [0-23] integer
             words: { //words displayed into the countdown
@@ -456,6 +499,11 @@
 
     <script>
         const rootElement = document.querySelector(':root');
+        const audioIconWrapper = document.querySelector('.audio-icon-wrapper');
+        const audioIcon = document.querySelector('.audio-icon-wrapper i');
+        const song = document.querySelector('#song');
+        let isPlaying = false;
+
         function disableScroll() {
             scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
@@ -463,20 +511,41 @@
             window.onscroll = function () {
                 window.scrollTo(scrollLeft, scrollTop);
             }
-
-
             rootElement.style.scrollBehavior = 'auto';
         }
 
         function enableScroll() {
             window.onscroll = function () { };
             rootElement.style.scrollBehavior = 'smooth';
-            localStorage.setItem('opened', 'true');
+            // localStorage.setItem('opened', 'true');
+            playAudio();
         }
 
-        if (!localStorage.getItem('opened')) {
-            disableScroll();
+        function playAudio() {
+            song.volume = 0.1;
+            audioIconWrapper.style.display = 'flex';
+            song.play();
+            isPlaying = true;
         }
+
+        audioIconWrapper.onclick = function () {
+            if (isPlaying === true) {
+                song.pause();
+                audioIcon.classList.remove('bi-disc');
+                audioIcon.classList.add('bi-pause-circle');
+            } else {
+                song.play();
+                audioIcon.classList.add('bi-disc');
+                audioIcon.classList.remove('bi-pause-circle');
+            }
+
+            isPlaying = !isPlaying;
+        }
+
+        // if (!localStorage.getItem('opened')) {
+        //     disableScroll();
+        // }
+        disableScroll();
 
     </script>
 
@@ -496,6 +565,18 @@
                     })
             });
         });
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = urlParams.get('n') || '';
+        const pronoun = urlParams.get('p') || 'Mr/Mrs/Brother/Sisters';
+
+        const namaContainer = document.querySelector('.hero h4 span');
+        namaContainer.innerText = `${pronoun} ${nama},`.replace(/ ,$/, ',');
+
+        document.querySelector('#nama').value = nama;
+
     </script>
 </body>
 
